@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { Tabs, Stack } from 'expo-router';
+import { Tabs } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { SettingsProvider } from '../context/SettingsContext';
-import { registerBackgroundFetchAsync } from '../lib/backgroundTasks';
+import { registerTradeTaskAsync } from '../lib/backgroundTasks';
 import 'nativewind';
 
 // Prevent auto hiding the splash screen
@@ -19,7 +18,7 @@ export default function RootLayout() {
     const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold });
 
     useEffect(() => {
-        registerBackgroundFetchAsync();
+        registerTradeTaskAsync();
     }, []);
 
     useEffect(() => {

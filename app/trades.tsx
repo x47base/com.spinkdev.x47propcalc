@@ -1,15 +1,11 @@
-import { useState, useEffect } from 'react';
-import {
-    SafeAreaView,
-    View,
-    Text,
-    ScrollView,
-    StyleSheet
-} from 'react-native';
+import { useContext } from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Button } from '@rneui/themed';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import { Card } from 'react-native-elements';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { SettingsContext, type Trade } from '../context/SettingsContext';
+
 import "nativewind";
 
 // Configure notifications
@@ -18,6 +14,8 @@ Notifications.setNotificationHandler({
         shouldShowAlert: true,
         shouldPlaySound: false,
         shouldSetBadge: false,
+        shouldShowBanner: true,
+        shouldShowList: true,
     }),
 });
 
@@ -25,29 +23,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function TradesScreen() {
     const navigation = useNavigation();
-    const [trades, setTrades] = useState([]);
-
-    const loadTrades = async () => {
-        const stored = await AsyncStorage.getItem('trades');
-        setTrades(stored ? JSON.parse(stored) : []);
-    };
-
-    useEffect(() => {
-        loadTrades();
-        const sub = Notifications.addNotificationReceivedListener(() => loadTrades());
-        return () => sub.remove();
-    }, []);
-
-    const deleteTrade = async (id: any) => {
-        const filtered = trades.filter(t => t.id !== id);
-        await AsyncStorage.setItem('trades', JSON.stringify(filtered));
-        setTrades(filtered);
-    };
-    const editTrade = async (updated: any) => {
-        const newList = trades.map(t => t.id === updated.id ? updated : t);
-        await AsyncStorage.setItem('trades', JSON.stringify(newList));
-        setTrades(newList);
-    };
+    const { trades, removeTrade } = useContext(SettingsContext);
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f9fafb' }}>
@@ -55,7 +31,7 @@ export default function TradesScreen() {
                 <Text style={{ fontSize: 28, fontWeight: '700', textAlign: 'center', marginBottom: 20 }}>
                     Saved Trades
                 </Text>
-                {trades.length ? trades.map(t => (
+                {trades.length ? trades.map((t: Trade) => (
                     <Card containerStyle={styles.card} key={t.id}>
                         {/* Header */}
                         <View style={styles.header}>
@@ -64,14 +40,14 @@ export default function TradesScreen() {
                                 <Button
                                     type="outline"
                                     size="sm"
-                                    onPress={() => navigation.navigate('edit-trade', { trade: t, onSave: editTrade })}
+                                    onPress={() => navigation.navigate('edit-trade', { trade: t })}
                                     containerStyle={styles.buttonSpacing}
                                     title="Edit"
                                 />
                                 <Button
                                     type="outline"
                                     size="sm"
-                                    onPress={() => deleteTrade(t.id)}
+                                    onPress={() => removeTrade(t.id)}
                                     title="Delete"
                                 />
                             </View>

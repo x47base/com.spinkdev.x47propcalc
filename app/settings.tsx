@@ -1,7 +1,8 @@
-import { useContext, useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, TextInput, Alert, ScrollView } from 'react-native';
+import { useContext, useState } from 'react';
+import { View, Text, TextInput, Alert, ScrollView } from 'react-native';
 import { Button } from '@rneui/themed';
 import { SettingsContext } from '../context/SettingsContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SettingsScreen() {
     const { settings, update } = useContext(SettingsContext);

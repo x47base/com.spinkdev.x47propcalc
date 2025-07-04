@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
 import {
-    SafeAreaView,
     View,
     Text,
     TextInput,
@@ -10,9 +9,9 @@ import {
     StyleSheet
 } from 'react-native';
 import { Button, Card } from '@rneui/themed';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
-import { SettingsContext } from '../context/SettingsContext';
+import { SettingsContext, type Trade } from '../context/SettingsContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Configure notifications
 Notifications.setNotificationHandler({
@@ -20,11 +19,13 @@ Notifications.setNotificationHandler({
         shouldShowAlert: true,
         shouldPlaySound: false,
         shouldSetBadge: false,
+        shouldShowBanner: true,
+        shouldShowList: true,
     }),
 });
 
 export default function CalculatorScreen() {
-    const { settings } = useContext(SettingsContext);
+    const { settings, addTrade } = useContext(SettingsContext);
 
     const [symbol, setSymbol] = useState('');
     const [accountBalance, setAccountBalance] = useState('');
@@ -76,7 +77,7 @@ export default function CalculatorScreen() {
 
     const saveTrade = async () => {
         try {
-            const trade = {
+            const trade: Trade = {
                 id: Date.now(),
                 symbol,
                 entryPrice,
@@ -84,11 +85,13 @@ export default function CalculatorScreen() {
                 takeProfit,
                 ...result
             };
+            addTrade(trade);
+            /*
             const stored = await AsyncStorage.getItem('trades');
             const list = stored ? JSON.parse(stored) : [];
             await AsyncStorage.setItem('trades', JSON.stringify([trade, ...list]));
+            */
             Alert.alert('Saved', 'Trade has been saved');
-            // Schedule notification in 1 hour
             await Notifications.scheduleNotificationAsync({
                 content: { title: 'Trade Reminder', body: `${symbol} entry at ${entryPrice}` },
                 trigger: { seconds: 3600 }
