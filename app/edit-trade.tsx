@@ -1,16 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView, Text, TextInput, Alert, ScrollView, View } from 'react-native';
 import { Button } from '@rneui/themed';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function EditTradeScreen() {
     const navigation = useNavigation();
     const router = useRoute();
-    const { trade, onSave } = router.params;
+    const { trade } = router.params;
     const [exitPrice, setExitPrice] = useState(trade.exitPrice?.toString() || '');
     const [winner, setWinner] = useState(trade.winner ?? false);
     const [profit, setProfit] = useState(trade.profit?.toString() || '');
+    const [trades, setTrades] = useState([]);
+
+    const loadTrades = async () => {
+        const stored = await AsyncStorage.getItem('trades');
+        setTrades(stored ? JSON.parse(stored) : []);
+    };
+
+    useEffect(() => {
+        loadTrades();
+    }, []);
+
+    const onSave = async (updated: any) => {
+        const newList = trades.map(t => t.id === updated.id ? updated : t);
+        await AsyncStorage.setItem('trades', JSON.stringify(newList));
+        setTrades(newList);
+    };
 
     const save = () => {
         const exit = parseFloat(exitPrice);
