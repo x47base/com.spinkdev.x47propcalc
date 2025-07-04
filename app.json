@@ -1,0 +1,64 @@
+{
+  "expo": {
+    "name": "x47PropCalc",
+    "scheme": "com.spinkdev.x47propcalc",
+    "slug": "x47propcalc",
+    "version": "1.0.0",
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "experiments": {
+      "tsconfigPaths": true
+    },
+    "plugins": [
+      "expo-router",
+      "expo-notifications",
+      "expo-media-library"
+    ],
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "remote-notification",
+          "remote-notification"
+        ],
+        "NSPhotoLibraryUsageDescription": "Allow x47PropCalc to access your photo library to save Profit and Loss (PnL) cards as images for your records.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "bundleIdentifier": "com.spinkdev.x47propcalc"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ],
+      "package": "com.spinkdev.x47propcalc"
+    },
+    "description": "A trade size calculator with trade journaling and notification features. Trade data (trades, timestamps, notes) is stored locally using AsyncStorage.",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4cd4c5c0-64b2-43c8-a961-c08dd48bc054"
+      }
+    }
+  }
+}
