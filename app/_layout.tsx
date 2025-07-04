@@ -70,6 +70,24 @@ export default function RootLayout() {
                             ),
                         }}
                     />
+                    <Tabs.Screen
+                        name="trades"
+                        options={{
+                            title: 'Trades',
+                            tabBarIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons name="chart-line" size={size} color={color} />
+                            ),
+                        }}
+                    />
+                    <Tabs.Screen
+                        name="settings"
+                        options={{
+                            title: 'Settings',
+                            tabBarIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons name="cog" size={size} color={color} />
+                            ),
+                        }}
+                    />
                 </Tabs>
             </SettingsProvider>
         </GestureHandlerRootView>
