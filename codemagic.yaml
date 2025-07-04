@@ -7,7 +7,6 @@ workflows:
         APP_SCHEME: "com.spinkdev.x47propcalc"
         APP_PACKAGE: "com.spinkdev.x47propcalc"
       node: latest
-      expo: latest
     scripts:
       - name: Install dependencies
         script: |
