@@ -88,6 +88,13 @@ export default function RootLayout() {
                             ),
                         }}
                     />
+                    <Tabs.Screen
+                        name="edit-trade"
+                        options={{
+                            href: null,
+                            headerShown: false,
+                        }}
+                    />
                 </Tabs>
             </SettingsProvider>
         </GestureHandlerRootView>
