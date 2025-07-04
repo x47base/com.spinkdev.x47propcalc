@@ -1,6 +1,7 @@
 {
   "name": "x47propcalc",
   "version": "1.0.0",
+  "publisher": "Samuel Spink",
   "scripts": {
     "android": "expo run:android",
     "ios": "expo run:ios",

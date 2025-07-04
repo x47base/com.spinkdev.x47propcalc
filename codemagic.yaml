@@ -58,4 +58,4 @@ workflows:
     publishing:
       email:
         recipients:
-          - your.email@example.com
+          - x47base@proton.me
