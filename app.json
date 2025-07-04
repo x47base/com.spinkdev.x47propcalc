@@ -13,11 +13,12 @@
     "plugins": [
       "expo-router",
       "expo-notifications",
-      "expo-media-library"
+      "expo-media-library",
+      "expo-system-ui"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -51,7 +52,8 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE"
       ],
-      "package": "com.spinkdev.x47propcalc"
+      "package": "com.spinkdev.x47propcalc",
+      "edgeToEdgeEnabled": true
     },
     "description": "A trade size calculator with trade journaling and notification features. Trade data (trades, timestamps, notes) is stored locally using AsyncStorage.",
     "extra": {
