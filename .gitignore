@@ -23,3 +23,5 @@ android
 .metro-health-check*
 
 package-lock.json
+test.py
+merged_output.txt

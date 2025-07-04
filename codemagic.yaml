@@ -8,9 +8,11 @@ workflows:
         APP_PACKAGE: "com.spinkdev.x47propcalc"
       node: latest
     scripts:
-      - name: Install dependencies
+      - name: Clean & install
         script: |
-          npm install --force
+          rm -rf node_modules
+          npm cache clean --force
+          npm ci --legacy-peer-deps
       - name: Build Android APK
         script: |
           eas build --platform android --non-interactive --profile development
