@@ -73,5 +73,20 @@
     "typescript": "~5.8.3"
   },
   "main": "expo-router/entry",
-  "private": true
+  "private": true,
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "enabled": true,
+        "exclude": [
+          "@rneui/themed",
+          "react-native-chart-kit",
+          "@react-native/metro-config",
+          "react-native-elements",
+          "react-native-renderer"
+        ],
+        "listUnknownPackages": false
+      }
+    }
+  }
 }

@@ -3,7 +3,7 @@
     "name": "x47PropCalc",
     "scheme": "com.spinkdev.x47propcalc",
     "slug": "x47propcalc",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "web": {
       "favicon": "./assets/favicon.png"
     },
